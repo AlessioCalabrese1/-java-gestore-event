@@ -1,16 +1,16 @@
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class Event {
     private String title;
-    private String date;
+    private LocalDate date;
     private int totalSeats;
     private int reservedSeats = 0;
 
-    public Event(String title, String date, int totalSeats) throws Exception{
+    public Event(String title, LocalDate date, int totalSeats) throws Exception{
         setTitle(title);
         setDate(date);
         setTotalSeats(totalSeats);
@@ -24,27 +24,17 @@ public class Event {
         this.title = title;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) throws Exception{
-        try {
-            SimpleDateFormat pattern = new SimpleDateFormat("dd/MM/yyyy");
-            Date eventD = (Date) pattern.parse(date);
-            Calendar c = Calendar.getInstance();
-            Date now = (Date) c.getTime();
-            long elapsedms = eventD.getTime() - now.getTime();
-            long diff = TimeUnit.MINUTES.convert(elapsedms, TimeUnit.MILLISECONDS);
-            System.out.println("Diff: " + diff);
-            if (diff < 0) {
-                throw new Exception("La data inserita deve essere maggiore di quella corrente!");
-            }
-        } catch (Exception e) {
-            System.err.println(e);
+    public void setDate(LocalDate date) throws Exception{
+        LocalDate now = LocalDate.now();
+        if (date.isAfter(now)) {
+            this.date = date;
+        }else{
+            throw new Exception("Inserire una data valida!");
         }
-
-        this.date = date;
     }
 
     public int getTotalSeats() {

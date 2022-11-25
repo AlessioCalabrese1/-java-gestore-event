@@ -1,4 +1,6 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,38 +36,56 @@ public class Main {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+        
 
-        // boolean sentinel = true;
-        // while (sentinel) {
-        //     System.out.println("Si vuole fare delle prenotazioni? (y/n)");
-        //     String conf = sn.next();
-        //     if (conf.equals("y")) {
-        //         System.out.println("-------------------------------");
-        //         System.out.println("Quante prenotazioni si vuole effettuare?");
-        //         int nReservations = sn.nextInt();
-        //         event.book(nReservations);
-        //         System.out.println(event);
+        LocalDate concertDate = null;
+        LocalTime concertHour = null;
+        BigDecimal concertPrice = new BigDecimal("39.99111111");
+        Event concert = null;
+        try {
+            concertDate = LocalDate.parse("2027-06-13");
+            concertHour = LocalTime.parse("21:30");
+            concert = new Concert("Ernia Concert", concertDate, 500, concertHour, concertPrice);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        System.out.println(concert);
 
-        //         System.out.println("-------------------------------");
-        //         System.out.println("Si vogliono cancellare delle prenotazioni? (y/n)");
-        //         conf = sn.next();
-        //         if (conf.equals("y")) {
-        //             System.out.println("-------------------------------");
-        //             System.out.println("Quante prenotazioni si desidera cancellare?");
-        //             int nCancel = sn.nextInt();
-        //             event.cancel(nCancel);
-        //             System.out.println(event);
-        //             System.out.println("-------------------------------");
-        //         }
-        //     }else if(conf.equals("n")){
-        //         System.out.println("-------------------------------");
-        //         System.out.println(event);
-        //         System.out.println("Arrivederci e buona giornata!");
-        //         sentinel = false;
-        //     }else{
-        //         System.out.println("Il valore inserito non è corretto! Riprovare!");
-        //         System.out.println("-------------------------------");
-        //     }
-        // }
+
+        boolean sentinel = true;
+        Event event = concert;
+        System.out.println("-------------------------------");
+        while (sentinel) {
+            System.out.println("Si vuole fare delle prenotazioni? (y/n)");
+            String conf = sn.next();
+            if (conf.equals("y")) {
+                System.out.println("-------------------------------");
+                System.out.println("Quante prenotazioni si vuole effettuare?");
+                
+                int nReservations = sn.nextInt();
+                event.book(nReservations);
+                System.out.println(event);
+
+                System.out.println("-------------------------------");
+                System.out.println("Si vogliono cancellare delle prenotazioni? (y/n)");
+                conf = sn.next();
+                if (conf.equals("y")) {
+                    System.out.println("-------------------------------");
+                    System.out.println("Quante prenotazioni si desidera cancellare?");
+                    int nCancel = sn.nextInt();
+                    event.cancel(nCancel);
+                    System.out.println(event);
+                    System.out.println("-------------------------------");
+                }
+            }else if(conf.equals("n")){
+                System.out.println("-------------------------------");
+                System.out.println(event);
+                System.out.println("Arrivederci e buona giornata!");
+                sentinel = false;
+            }else{
+                System.out.println("Il valore inserito non è corretto! Riprovare!");
+                System.out.println("-------------------------------");
+            }
+        }
     }
 }

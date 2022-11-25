@@ -1,11 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class ProgrammEvents {
     
@@ -48,7 +45,18 @@ public class ProgrammEvents {
         //comparator svolto con Lamba Exspression
         Comparator<Event> comparatorAsc = (event1, event2) -> event1.getDate().compareTo(event2.getDate());
         Collections.sort(events, comparatorAsc);
-        return "Gli eventi ordinati per data sono: " + events;
+        
+        String print = "";
+        for (Event event : events) {
+            print += event.getDate() + " - " + event.getTitle() + "\n";
+            
+        }
+        
+        return "Gli eventi ordinati per data sono: " + print;
+    }
+
+    public Event getEvent(int i){
+        return events.get(i);
     }
 
     @Override

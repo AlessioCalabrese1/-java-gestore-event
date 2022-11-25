@@ -50,38 +50,42 @@ public class Event {
     }
 
 
-    public void book(){
+    public void book(int nReservations){
         try {
-            bookException();
+            bookException(nReservations);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void bookException() throws Exception{
+    private void bookException(int nReservations) throws Exception{
         LocalDate now = LocalDate.now();
-        int placesAvailable = totalSeats - reservedSeats;
-        if (date.isAfter(now) && placesAvailable > 0) {
-            reservedSeats++;
-            System.out.println("Il biglietto è stato prenotato con successo!");
+        int placesAvailable = totalSeats - reservedSeats - nReservations;
+        if (date.isAfter(now) && placesAvailable >= 0) {
+            reservedSeats += nReservations;
+            System.out.println("L'operazione è andata a buon fine!");
         }else{
-            throw new Exception("Non ci sono più posti disponibili!");
+            throw new Exception("Non ci sono abbastanza posti disponibili!");
         }
     }
 
-    public void cancel(){
+    public void cancel(int nCancel){
         try {
-            cancelException();
+            cancelException(nCancel);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void cancelException() throws Exception{
+    private void cancelException(int nCancel) throws Exception{
         LocalDate now = LocalDate.now();
-        if (date.isAfter(now) && reservedSeats > 0) {
-            reservedSeats--;
-            System.out.println("Il biglietto è stato cancellato con successo!");
+        int numberSeatsCanceled = reservedSeats - nCancel;
+        if (date.isAfter(now) && numberSeatsCanceled >= 0) {
+            reservedSeats -= nCancel;
+            System.out.println("L'operazione è andata a buon fine!");
+            System.out.println("-------------------------------");
+        }else if(date.isAfter(now) && numberSeatsCanceled < 0){
+            throw new Exception("Le prenotazioni da cancellare sono maggiori delle prenotaioni effettuate!");
         }else{
             throw new Exception("Non ci sono prenotazioni!");
         }
@@ -89,7 +93,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "L'evento aggiunto è: " + "\nTitle: " + title + "\nDate: " + date + "\nPosti totali: "
+        return "Title: " + title + "\nDate: " + date + "\nPosti totali: "
         + totalSeats + "\nPosti riservati: " + reservedSeats;
     }
 }

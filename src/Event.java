@@ -69,6 +69,24 @@ public class Event {
         }
     }
 
+    public void cancel(){
+        try {
+            cancelException();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void cancelException() throws Exception{
+        LocalDate now = LocalDate.now();
+        if (date.isAfter(now) && reservedSeats > 0) {
+            reservedSeats--;
+            System.out.println("Il biglietto è stato cancellato con successo!");
+        }else{
+            throw new Exception("Non ci sono prenotazioni!");
+        }
+    }
+
     @Override
     public String toString() {
         return "L'evento aggiunto è: " + "\nTitle: " + title + "\nDate: " + date + "\nPosti totali: "

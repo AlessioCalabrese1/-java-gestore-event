@@ -7,6 +7,7 @@ public class Main {
             Event event = new Event("Nuovo Nuovo", eventDate, 200);
             System.out.println(event);
             event.book();
+            event.cancel();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

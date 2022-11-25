@@ -49,9 +49,12 @@ public class Main {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+
+        if (concert == null) {
+            System.out.println("Arrivederci e  buona giornata!");
+            return ;
+        }
         System.out.println(concert);
-
-
         boolean sentinel = true;
         Event event = concert;
         System.out.println("-------------------------------");

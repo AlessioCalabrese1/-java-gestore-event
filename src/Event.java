@@ -1,8 +1,4 @@
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 public class Event {
     private String title;
@@ -41,20 +37,41 @@ public class Event {
         return totalSeats;
     }
 
-    public int getReservedSeats() {
-        return reservedSeats;
-    }
-
+    
     private void setTotalSeats(int totalSeats) throws Exception{
         if (totalSeats < 0) {
             throw new Exception("Il numero di posti totali deve essere positivo!");
         }
         this.totalSeats = totalSeats;
     }
+    
+    public int getReservedSeats() {
+        return reservedSeats;
+    }
+
+
+    public void book(){
+        try {
+            bookException();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void bookException() throws Exception{
+        LocalDate now = LocalDate.now();
+        int placesAvailable = totalSeats - reservedSeats;
+        if (date.isAfter(now) && placesAvailable > 0) {
+            reservedSeats++;
+            System.out.println("Il biglietto è stato prenotato con successo!");
+        }else{
+            throw new Exception("Non ci sono più posti disponibili!");
+        }
+    }
 
     @Override
     public String toString() {
         return "L'evento aggiunto è: " + "\nTitle: " + title + "\nDate: " + date + "\nPosti totali: "
-         + totalSeats + "\nPosti riservati: " + reservedSeats;
+        + totalSeats + "\nPosti riservati: " + reservedSeats;
     }
 }

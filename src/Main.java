@@ -17,10 +17,14 @@ public class Main {
 
             LocalDate eventDate3 = LocalDate.parse("2025-09-25");
             Event event3 = new Event("Nuovo Nuovo 3", eventDate3, 200);
+
+            LocalDate eventDate4 = LocalDate.parse("2025-09-25");
+            Event event4 = new Event("Nuovo Nuovo 3", eventDate4, 200);
             
             progEvents.addEvent(event1);
             progEvents.addEvent(event2);
             progEvents.addEvent(event3);
+            progEvents.addEvent(event4);
 
             System.out.println(progEvents);
             System.out.println("-------------------------------");
@@ -33,6 +37,11 @@ public class Main {
             System.out.println("-------------------------------");
 
             System.out.println(progEvents.getEventsSortedByDate());
+            if (event1.equals(event4)) {
+                System.out.println("I due eventi sono uguali!");
+            }else{
+                System.out.println("I due eventi NON sono uguali!");
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -54,41 +63,41 @@ public class Main {
             System.out.println("Arrivederci e  buona giornata!");
             return ;
         }
-        System.out.println(concert);
-        boolean sentinel = true;
-        Event event = concert;
-        System.out.println("-------------------------------");
-        while (sentinel) {
-            System.out.println("Si vuole fare delle prenotazioni? (y/n)");
-            String conf = sn.next();
-            if (conf.equals("y")) {
-                System.out.println("-------------------------------");
-                System.out.println("Quante prenotazioni si vuole effettuare?");
+        // System.out.println(concert);
+        // boolean sentinel = true;
+        // Event event = concert;
+        // System.out.println("-------------------------------");
+        // while (sentinel) {
+        //     System.out.println("Si vuole fare delle prenotazioni? (y/n)");
+        //     String conf = sn.next();
+        //     if (conf.equals("y")) {
+        //         System.out.println("-------------------------------");
+        //         System.out.println("Quante prenotazioni si vuole effettuare?");
                 
-                int nReservations = sn.nextInt();
-                event.book(nReservations);
-                System.out.println(event);
+        //         int nReservations = sn.nextInt();
+        //         event.book(nReservations);
+        //         System.out.println(event);
 
-                System.out.println("-------------------------------");
-                System.out.println("Si vogliono cancellare delle prenotazioni? (y/n)");
-                conf = sn.next();
-                if (conf.equals("y")) {
-                    System.out.println("-------------------------------");
-                    System.out.println("Quante prenotazioni si desidera cancellare?");
-                    int nCancel = sn.nextInt();
-                    event.cancel(nCancel);
-                    System.out.println(event);
-                    System.out.println("-------------------------------");
-                }
-            }else if(conf.equals("n")){
-                System.out.println("-------------------------------");
-                System.out.println(event);
-                System.out.println("Arrivederci e buona giornata!");
-                sentinel = false;
-            }else{
-                System.out.println("Il valore inserito non è corretto! Riprovare!");
-                System.out.println("-------------------------------");
-            }
-        }
+        //         System.out.println("-------------------------------");
+        //         System.out.println("Si vogliono cancellare delle prenotazioni? (y/n)");
+        //         conf = sn.next();
+        //         if (conf.equals("y")) {
+        //             System.out.println("-------------------------------");
+        //             System.out.println("Quante prenotazioni si desidera cancellare?");
+        //             int nCancel = sn.nextInt();
+        //             event.cancel(nCancel);
+        //             System.out.println(event);
+        //             System.out.println("-------------------------------");
+        //         }
+        //     }else if(conf.equals("n")){
+        //         System.out.println("-------------------------------");
+        //         System.out.println(event);
+        //         System.out.println("Arrivederci e buona giornata!");
+        //         sentinel = false;
+        //     }else{
+        //         System.out.println("Il valore inserito non è corretto! Riprovare!");
+        //         System.out.println("-------------------------------");
+        //     }
+        // }
     }
 }

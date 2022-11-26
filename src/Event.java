@@ -92,6 +92,16 @@ public class Event {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        Event event1 = (Event)obj;
+        if (event1.title.compareTo(this.title) == 0 && event1.date.isEqual(this.date)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
     public String toString() {
         return "Title: " + title + "\nDate: " + date + "\nPosti totali: "
         + totalSeats + "\nPosti riservati: " + reservedSeats;

@@ -57,6 +57,30 @@ public class ProgrammUnicEvents{
         return eventsOnSelectedDate;
     }
 
+    public Event getMaxPostiTotaliEvento(){
+        int max = Integer.MIN_VALUE;
+        Event x = null;
+        for (Event event : eventsSet) {
+            if (event.getTotalSeats() > max) {
+                max = event.getTotalSeats();
+                x = event;
+            }
+        }
+        return x;
+    }
+
+    public Event getMinPostiTotaliEvento(){
+        int min = Integer.MAX_VALUE;
+        Event x = null;
+        for (Event event : eventsSet) {
+            if (event.getTotalSeats() > min) {
+                min = event.getTotalSeats();
+                x = event;
+            }
+        }
+        return x;
+    }
+
     @Override
     public String toString() {
         return "Gli eventi in programma sono: \n" + eventsSet;
